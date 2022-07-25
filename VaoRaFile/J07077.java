@@ -1,5 +1,7 @@
 package OOPs.VaoRaFile;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.Stack;
 
@@ -23,6 +25,7 @@ public class J07077 {
     public static Long Infix(String s){
         Stack<Character> ops = new Stack<>();
         Stack<Long> val = new Stack<>();
+        s = "(" + s + ")";
         int n = s.length();
         for (int i = 0; i < n; i++) {
             if (s.charAt(i) == '(')
@@ -33,7 +36,7 @@ public class J07077 {
                     x = (x * 10) + (s.charAt(i) - '0');
                     ++i;
                 }
-                if (s.charAt(i) < '0' || s.charAt(i) > '9') --i;
+                if (!(s.charAt(i) >= '0' && s.charAt(i) <= '9')) --i;
                 val.push(x);
             }
             else if (s.charAt(i) == ')') {
@@ -65,8 +68,8 @@ public class J07077 {
         return val.peek();
     }
 
-    public static void main(String [] args){
-        Scanner sc = new Scanner (System.in);
+    public static void main(String [] args) throws FileNotFoundException{
+        Scanner sc = new Scanner (new File("BIEUTHUC.in"));
         String x = sc.nextLine();
         int t = Integer.valueOf(x);
         x.isEmpty();
