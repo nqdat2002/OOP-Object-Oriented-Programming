@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Vector;
 
 public class J07011 {
     public static void main(String[] args) throws FileNotFoundException {
@@ -26,12 +27,12 @@ public class J07011 {
         for(int i = 0; i < array.length; ++i){
             res += isWord(array[i]) + " ";
         }
-        String [] a = res.split(" ");
         List<Word> list = new ArrayList<>();
-        for(int i = 0; i < a.length; ++i){
-            list.add(new Word(a[i]));
+        Vector<String> v = Convert(res);
+        for (String str: v) {
+            list.add(new Word(str));
         }
-        for(int i = 0; i < list.size() - 1; ++i){
+        for(int i = 0; i < list.size(); ++i){
             if(list.get(i).getVs() == false){
                 int cnt = list.get(i).getCount();
                 for(int j = i + 1; j < list.size(); ++j){
@@ -66,6 +67,20 @@ public class J07011 {
             }
         }
         return s;
+    }
+
+    public static Vector<String> Convert(String s){
+        Vector<String> res = new Vector<>();
+        String tmp = "";
+        for (int i = 0; i < s.length(); i++) {
+            if (s.charAt(i) == ' ' && tmp.length() > 0) {
+                tmp = tmp.toLowerCase();
+                res.add(tmp);
+                tmp = "";
+            } else if ((s.charAt(i) >= 'a' && s.charAt(i) <= 'z') || s.charAt(i) >= '0' && s.charAt(i) <= '9')
+                tmp += s.charAt(i);
+        }
+        return res;
     }
 }
 
