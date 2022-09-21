@@ -12,7 +12,6 @@ public class J03015 {
             BigInteger a = sc.nextBigInteger();
             BigInteger b = sc.nextBigInteger();
             BigInteger x = a.subtract(b);
-            x = x.abs();
             String s = x.toString();
             System.out.println(s);
         }
