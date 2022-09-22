@@ -3,27 +3,25 @@ package OOP_TOT_NGHIEP.NganXep;
 import java.util.Scanner;
 import java.util.Stack;
 
-public class T214 {
+public class T216 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int t = Integer.valueOf(sc.nextLine());
         while (t-- > 0) {
             String s = sc.nextLine();
             int n = s.length();
-            Stack<String> st = new Stack<>();
-            for (int i = n - 1; i >= 0; --i) {
+            Stack<Long> st = new Stack<>();
+            for (int i = 0; i < n; ++i) {
                 char c = s.charAt(i);
                 if (isOperator(c)) {
-                    String x = st.peek();
+                    Long x = st.peek();
                     st.pop();
-                    String y = st.peek();
+                    Long y = st.peek();
                     st.pop();
-                    st.push(x + y + c);
+                    st.push(Cal(y, x, c));
 
                 } else {
-                    char[] arr = { c };
-                    String tmp = new String(arr);
-                    st.add(tmp);
+                    st.add((long)(c - 48));
                 }
             }
             System.out.println(st.peek());
@@ -33,5 +31,12 @@ public class T214 {
 
     public static boolean isOperator(char x) {
         return x == '+' || x == '-' || x == '*' || x == '/';
+    }
+
+    public static long Cal(long x, long y, char c){
+        if(c == '+') return x + y;
+        if(c == '-') return x - y;
+        if(c == '*') return x * y;
+        return x / y;
     }
 }
